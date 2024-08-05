@@ -7,6 +7,9 @@ import com.toy.cryptoautomessage.repository.ReportHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.text.DecimalFormat;
 
 @Service
@@ -15,6 +18,8 @@ public class UpbitSlackService {
     private final SlackHttpClient slackHttpClient;
     private final UpbitHttpClient upbitHttpClient;
     private final ReportHistoryRepository repository;
+
+    private static final Logger logger = LoggerFactory.getLogger(UpbitSlackService.class);
 
     public void execute(String market){
         // 호출
@@ -30,7 +35,15 @@ public class UpbitSlackService {
         sb.append(market);
         sb.append(" 비트코인 가격 : " );
         sb.append(formatPrice);
+
+        // 메세지 발송 전 로그 출력
+        String message = sb.toString();
+        logger.info("Slack message: " + message);
+
         slackHttpClient.send(sb.toString());
+
+        // 메세지 발송 후 로그 출력
+        logger.info("market: " + market);
 
         // 메세지 내역 저장
         repository.save(market, String.valueOf(tickerByMarket.getTrade_price()));
