@@ -34,6 +34,7 @@ dependencies {
     implementation 'com.slack.api:slack-api-client:1.28.0'
     implementation 'com.slack.api:slack-api-model:1.28.0'
     implementation 'org.springframework.boot:spring-boot-starter-batch'
+    implementation 'com.h2database:h2'
 }
 
 tasks.named('test') {
