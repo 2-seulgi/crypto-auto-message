@@ -28,7 +28,6 @@ public class UpbitSlackService {
         DecimalFormat df = new DecimalFormat("#,###");
         String formatPrice = df.format(tickerByMarket.getTrade_price()) + "원";
 
-
         // 메세지 발송
         StringBuilder sb = new StringBuilder();
         sb.append("실시간 데이터 ");

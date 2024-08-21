@@ -1,8 +1,10 @@
 package com.toy.cryptoautomessage.http;
 
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
+@Builder
 public class UpbitTickerDto {
     private String market;
     private String trade_date;
